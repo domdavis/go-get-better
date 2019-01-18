@@ -5,20 +5,19 @@ This repository contains the solutions for the exercises contained in the
 branch (for example `git checkout exercise-1`, or just select the branch from
 within GitHub).
 
-## Exercise 3
+## Exercise 4
 
-Turn your 'FizzBuzz' solution into a function in a package. Test the function. 
+Turn your 'FizzBuzz' solution into one that returns an error if it's passed a
+negative number. 
 
   * Your Function should take a number for the number of iterations
+  * Your function should return an error if that number is less than 0
   * Your function should return a string containing the FizzBuzz sequence
-
   
-> Feel free to reuse your code from exercise 1.
+> Feel free to reuse your code from exercise 3.
   
 ## Hints
 
   * You'll want to run `go mod init` (for example: 
-    `go mod init training/exercise3`)
-  * `go test` will test the code
-  * Your test file needs the suffix `_test.go`
-  * `go test --covermode=count` shows test coverage
+    `go mod init training/exercise4`)
+  * The function signature will be `FizzBuzz(n int) (string, error)`

@@ -1,14 +1,22 @@
-package exercise3
+package exercise4
 
 import (
+	"errors"
 	"strconv"
 	"strings"
 )
 
-// Generate the first n values of the FizzBuzz sequence. If n < 1 then this will
-// return the empty string.
-func FizzBuzz(n int) string {
+var ErrNegativeRange = errors.New("cannot produce negative amounts of FizzBuzz")
+
+// Generate the first n values of the FizzBuzz sequence. If n < 0 then this will
+// return an error.
+func FizzBuzz(n int) (string, error) {
 	var b strings.Builder
+
+	if n < 0 {
+		return "", ErrNegativeRange
+	}
+
 	for i := 1; i <= n; i++ {
 		if i%3 == 0 {
 			b.WriteString("Fizz")
@@ -25,5 +33,5 @@ func FizzBuzz(n int) string {
 		b.WriteString(" ")
 	}
 
-	return strings.TrimSpace(b.String())
+	return strings.TrimSpace(b.String()), nil
 }
