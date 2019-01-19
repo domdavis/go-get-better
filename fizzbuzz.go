@@ -1,37 +1,33 @@
-package exercise4
+package exercise5
 
 import (
 	"errors"
 	"strconv"
-	"strings"
 )
 
 var ErrNegativeRange = errors.New("cannot produce negative amounts of FizzBuzz")
 
 // Generate the first n values of the FizzBuzz sequence. If n < 0 then this will
 // return an error.
-func FizzBuzz(n int) (string, error) {
-	var b strings.Builder
-
+func FizzBuzz(n int) ([]string, error) {
 	if n < 0 {
-		return "", ErrNegativeRange
+		return []string{}, ErrNegativeRange
 	}
+
+	s := make([]string, n)
 
 	for i := 1; i <= n; i++ {
-		if i%3 == 0 {
-			b.WriteString("Fizz")
+		switch {
+		case i%3 == 0 && i%5 == 0:
+			s[i-1] = "FizzBuzz"
+		case i%3 == 0:
+			s[i-1] = "Fizz"
+		case i%5 == 0:
+			s[i-1] = "Buzz"
+		default:
+			s[i-1] = strconv.Itoa(i)
 		}
-
-		if i%5 == 0 {
-			b.WriteString("Buzz")
-		}
-
-		if i%3 != 0 && i%5 != 0 {
-			b.WriteString(strconv.Itoa(i))
-		}
-
-		b.WriteString(" ")
 	}
 
-	return strings.TrimSpace(b.String()), nil
+	return s, nil
 }

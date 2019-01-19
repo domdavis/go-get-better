@@ -5,19 +5,18 @@ This repository contains the solutions for the exercises contained in the
 branch (for example `git checkout exercise-1`, or just select the branch from
 within GitHub).
 
-## Exercise 4
+## Exercise 5
 
-Turn your 'FizzBuzz' solution into one that returns an error if it's passed a
-negative number. 
+Turn your 'FizzBuzz' solution into one that returns a slice. 
 
   * Your Function should take a number for the number of iterations
   * Your function should return an error if that number is less than 0
-  * Your function should return a string containing the FizzBuzz sequence
+  * Your function should return a slice of string containing the FizzBuzz 
+    sequence
   
-> Feel free to reuse your code from exercise 3.
+> Feel free to reuse your code from exercise 4.
   
 ## Hints
 
-  * You'll want to run `go mod init` (for example: 
-    `go mod init training/exercise4`)
-  * The function signature will be `FizzBuzz(n int) (string, error)`
+  * The function signature will be `FizzBuzz(n int) ([]string, error)`
+  * You can use `make([]string, size)`, or `a := append(a, item)`
