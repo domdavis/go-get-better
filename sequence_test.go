@@ -1,13 +1,13 @@
-package exercise8_test
+package training_test
 
 import (
 	"fmt"
 	"testing"
-	"training/exercise8"
+	"training"
 )
 
 func ExampleSequence() {
-	if r, err := exercise8.Run(exercise8.Simple, 5); err != nil {
+	if r, err := training.Run(training.Simple, 5); err != nil {
 		fmt.Println(err)
 	} else {
 		for _, v := range r {
@@ -22,23 +22,23 @@ func ExampleSequence() {
 func TestSequences(t *testing.T) {
 	for _, test := range []struct {
 		name      string
-		generator exercise8.Generator
+		generator training.Generator
 
-		sequence  exercise8.Sequence
+		sequence  training.Sequence
 	} {
 		{
 			name:      "simple",
-			generator: exercise8.Simple,
-			sequence:  exercise8.Sequence{"Simple", "1", "2", "3", "4", "5"},
+			generator: training.Simple,
+			sequence:  training.Sequence{"Simple", "1", "2", "3", "4", "5"},
 		},
 		{
 			name:      "FizzBuzz",
-			generator: exercise8.FizzBuzz,
-			sequence:  exercise8.Sequence{"FizzBuzz", "1", "2", "Fizz", "4", "Buzz"},
+			generator: training.FizzBuzz,
+			sequence:  training.Sequence{"FizzBuzz", "1", "2", "Fizz", "4", "Buzz"},
 		},
 	} {
 		t.Run(fmt.Sprintf("%s 1-5", test.name), func(t *testing.T) {
-			r, err := exercise8.Run(test.generator, 5)
+			r, err := training.Run(test.generator, 5)
 
 			if err != nil {
 				t.Errorf("unexpected error for sequence %s: %s", test.name, err)
@@ -57,7 +57,7 @@ func TestSequences(t *testing.T) {
 		})
 
 		t.Run(fmt.Sprintf("%s 0", test.name), func(t *testing.T) {
-			r, err := exercise8.Run(test.generator, 0)
+			r, err := training.Run(test.generator, 0)
 
 			if err != nil {
 				t.Errorf("unexpected error for sequence %s: %s", test.name, err)
@@ -71,9 +71,9 @@ func TestSequences(t *testing.T) {
 		})
 
 		t.Run(fmt.Sprintf("%s -1", test.name), func(t *testing.T) {
-			_, err := exercise8.Run(test.generator, -1)
+			_, err := training.Run(test.generator, -1)
 			
-			if err != exercise8.ErrNegativeRange {
+			if err != training.ErrNegativeRange {
 				t.Errorf("unexptected error for %s(-1): %s", test.name, err)
 			}
 		})
