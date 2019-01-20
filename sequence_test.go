@@ -1,12 +1,12 @@
-package exercise7_test
+package training_test
 import (
 	"fmt"
 	"testing"
-	"training/exercise7"
+	"training"
 )
 
 func ExampleSequence() {
-	r, err := exercise7.Run(15, exercise7.FizzBuzz)
+	r, err := training.Run(15, training.FizzBuzz)
 
 	if err != nil {
 		fmt.Println(err)
@@ -21,8 +21,8 @@ func ExampleSequence() {
 }
 
 func TestFizzBuzz(t *testing.T) {
-	_, err := exercise7.FizzBuzz(-1)
-	if err != exercise7.ErrNegativeRange {
+	_, err := training.FizzBuzz(-1)
+	if err != training.ErrNegativeRange {
 		t.Errorf("unexpected error: %s", err)
 	}
 }

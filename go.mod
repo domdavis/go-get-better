@@ -1,1 +1,1 @@
-module training/exercise7
+module training
