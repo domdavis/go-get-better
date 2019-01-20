@@ -1,1 +1,1 @@
-module github.com/domdavis/go-get-better
+module training
