@@ -20,8 +20,6 @@ environment.
   
 ## Hints
 
-  * You'll want to run `go mod init` (for example: 
-    `go mod init training/exercise2`)
   * `go build` compile the code
   * `go build -o fizzbuzz` will compile to a binary called `fizzbuzz`
   * you can quickly run the code to test it using `go run solution.go` (replace
