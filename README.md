@@ -12,3 +12,4 @@ Turn the Run function from exercise 9 into a type function on Generator
 ## Hints
 
   * The signature becomes: `func (g Generator) Run(n int) (Sequence, error)`
+  * `g := Generator(Simple)`
