@@ -5,12 +5,7 @@ This repository contains the solutions for the exercises contained in the
 branch (for example `git checkout exercise-1`, or just select the branch from
 within GitHub).
 
-## Exercise 11
+## Exercise 14
 
-Update the sequence type so when it's rendered as JSON it's output in the format 
-`{"name": ["1", "2",...]}`. An empty sequence should simply be `{}`
+Complete the implementation for the branch `pipelines`
 
-## Hints
-
-  * You'll need to implement `func (s Sequence) MarshalJSON() ([]byte, error)`
-  * The output is basically a map

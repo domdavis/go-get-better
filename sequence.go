@@ -1,102 +1,92 @@
 package training
 
 import (
-	"encoding/json"
 	"errors"
 	"strconv"
+	"strings"
 )
 
 // Sequence holds the results of a sequence generator. The entry 0 holds the
 // name of the sequence. Entry `n` holds the output for `n` on that sequence.
-type Sequence []string
-
-// Generator can generate a Sequence.
-type Generator interface {
-	Run(n int) (*Sequence, error)
+type Sequence struct {
+	Name     string
+	Elements []string
 }
 
-type Simple struct{}
-type FizzBuzz struct{}
-type DeferredReverse struct{}
+type Step func(in <-chan int, out chan<- string)
+
+// Generator can generate a Sequence.
+type Generator struct {
+	Name  string
+	Steps []Step
+}
 
 // ErrNegativeRange is returned if a sequence is given a range of less than 0.
 var ErrNegativeRange = errors.New("cannot produce negative sequence")
 
-// MarshalJSON renders a sequence as a JSON object with the sequence name as
-// the key
-func (s Sequence) MarshalJSON() ([]byte, error) {
-	var sequence []string
-	o := map[string][]string{}
-
-	if len(s) > 2 {
-		sequence = s[1:]
-	}
-
-	if len(s) > 1 {
-		o[s[0]] = sequence
-	}
-
-	return json.Marshal(o)
+// Simple just returns what was passed into it
+var Simple = Generator{
+	Name:  "Simple",
+	Steps: []Step{passthrough},
 }
 
-// Simple generator that returns the sequence 1 to n. If n < 0 then this will
-// return an error.
-func (_ Simple) Run(n int) (*Sequence, error) {
-	if n < 0 {
-		return &Sequence{}, ErrNegativeRange
-	}
-
-	s := make(Sequence, n+1)
-	s[0] = "Simple"
-
-	for i := 1; i <= int(n); i++ {
-		s[i] = strconv.Itoa(i)
-	}
-
-	return &s, nil
+// FizzBuzz returns the first n values of the FizzBuzz sequence.
+var FizzBuzz = Generator{
+	Name:  "FizzBuzz",
+	Steps: []Step{fizz, buzz, number},
 }
 
-// FizzBuzz returns the first n values of the FizzBuzz sequence. If n < 0 then
-// this will return an error.
-func (_ FizzBuzz) Run(n int) (*Sequence, error) {
+// Run the sequence g from 1 to n.
+func (g Generator) Run(n int) (Sequence, error) {
+	s := Sequence{Name: g.Name}
+
 	if n < 0 {
-		return &Sequence{}, ErrNegativeRange
+		return s, ErrNegativeRange
 	}
 
-	s := make(Sequence, n+1)
-	s[0] = "FizzBuzz"
+	in := make(chan int)
+	out := make(chan string)
 
-	for i := 1; i <= int(n); i++ {
-		switch {
-		case i%3 == 0 && i%5 == 0:
-			s[i] = "FizzBuzz"
-		case i%3 == 0:
-			s[i] = "Fizz"
-		case i%5 == 0:
-			s[i] = "Buzz"
-		default:
-			s[i] = strconv.Itoa(i)
+	s.Elements = make([]string, n)
+
+	for i := 1; i <= n; i++ {
+		b := strings.Builder{}
+		for _, step := range g.Steps {
+			go step(in, out)
+			in <- i
+			b.WriteString(<-out)
 		}
-	}
-	return &s, nil
-}
-
-func (_ DeferredReverse) Run(n int) (*Sequence, error) {
-	if n < 0 {
-		return &Sequence{}, ErrNegativeRange
-	}
-
-	s := &Sequence{"DeferredReverse"}
-
-	for i := 1; i <= int(n); i++ {
-		defer func(i int) { *s = append(*s, strconv.Itoa(i)) }(i)
+		s.Elements[i-1] = b.String()
 	}
 
 	return s, nil
 }
 
-// Run the sequence g from 1 to n.
-func Run(g Generator, n int) (Sequence, error) {
-	p, err := g.Run(n)
-	return *p, err
+func passthrough(in <-chan int, out chan<- string) {
+	out <- strconv.Itoa(<-in)
+}
+
+func fizz(in <-chan int, out chan<- string) {
+	if <-in%3 == 0 {
+		out <- "Fizz"
+	} else {
+		out <- ""
+	}
+}
+
+func buzz(in <-chan int, out chan<- string) {
+	if <-in%5 == 0 {
+		out <- "Buzz"
+	} else {
+		out <- ""
+	}
+}
+
+func number(in <-chan int, out chan<- string) {
+	i := <-in
+	if i%3 != 0 && i%5 != 0 {
+		out <- strconv.Itoa(i)
+	} else {
+		out <- ""
+	}
 }
