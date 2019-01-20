@@ -1,24 +1,30 @@
-package exercise5_test
+package exercise6_test
 import (
 	"fmt"
 	"testing"
-	"training/exercise5"
+	"training/exercise6"
 )
 
 func ExampleFizzBuzz() {
-	if r, err := exercise5.FizzBuzz(15); err != nil {
+	n := 15
+
+	r, err := exercise6.FizzBuzz(n)
+
+	if err != nil {
 		fmt.Println(err)
-	} else {
-		fmt.Println(r)
+	}
+
+	for i := 1; i <= n; i++ {
+		fmt.Print(r[i], " ")
 	}
 
 	// Output:
-	// [1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz]
+	// 1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz
 }
 
 func TestFizzBuzz(t *testing.T) {
-	_, err := exercise5.FizzBuzz(-1)
-	if err != exercise5.ErrNegativeRange {
+	_, err := exercise6.FizzBuzz(-1)
+	if err != exercise6.ErrNegativeRange {
 		t.Errorf("unexpected error: %s", err)
 	}
 }
