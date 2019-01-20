@@ -1,8 +1,7 @@
-package training
+package exercise8
 
 import (
 	"errors"
-	"fmt"
 	"strconv"
 )
 
@@ -36,7 +35,26 @@ func Simple(n int) (Sequence, error) {
 // FizzBuzz returns the first n values of the FizzBuzz sequence. If n < 0 then
 // this will return an error.
 func FizzBuzz(n int) (Sequence, error) {
-	return Sequence{}, fmt.Errorf("sequence Fizzbuzz(%d) not implemented", n)
+	if n < 0 {
+		return []string{}, ErrNegativeRange
+	}
+
+	s := make([]string, n+1)
+	s[0] = "FizzBuzz"
+
+	for i := 1; i <= n; i++ {
+		switch {
+		case i%3 == 0 && i%5 == 0:
+			s[i] = "FizzBuzz"
+		case i%3 == 0:
+			s[i] = "Fizz"
+		case i%5 == 0:
+			s[i] = "Buzz"
+		default:
+			s[i] = strconv.Itoa(i)
+		}
+	}
+	return s, nil
 }
 
 // Run the sequence g from 1 to n.

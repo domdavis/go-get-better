@@ -5,6 +5,12 @@ This repository contains the solutions for the exercises contained in the
 branch (for example `git checkout exercise-1`, or just select the branch from
 within GitHub).
 
-## Generator Template
+## Exercise 8
 
-Some template code to help with some of the boilerplate for later exercises.
+Use the `template` branch and your code from Exercise 7 to make all the tests
+pass.
+      
+## Hints
+
+  * You'll need up update your FizzBuzz generator to return "FizzBuzz" as the
+    first element of the sequence
