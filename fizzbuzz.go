@@ -1,4 +1,4 @@
-package exercise6
+package training
 
 import (
 	"errors"
