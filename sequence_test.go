@@ -1,6 +1,7 @@
 package training_test
 
 import (
+	"encoding/json"
 	"fmt"
 	"testing"
 	"training"
@@ -17,6 +18,28 @@ func ExampleSequence() {
 
 	// Output:
 	// Simple 1 2 3 4 5
+}
+
+func ExampleSequence_MarshalJSON() {
+	r, _ := training.Run(training.Simple{}, 5)
+
+	if b, err := json.Marshal(r); err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(string(b))
+	}
+
+	r, _ = training.Run(training.Simple{}, 0)
+
+	if b, err := json.Marshal(r); err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(string(b))
+	}
+
+	// Output:
+	// {"Simple":["1","2","3","4","5"]}
+	// {}
 }
 
 func TestSequences(t *testing.T) {

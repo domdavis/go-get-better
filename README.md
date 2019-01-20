@@ -7,24 +7,10 @@ within GitHub).
 
 ## Exercise 11
 
-Change Run back to a normal function, and change it to take a `Generator` 
-interface.
-
-The interface is: 
-
-```go
-package training
-
-type Sequence []string
-
-type Generator interface {
-	Run(n int) (*Sequence, error)
-}
-```
+Update the sequence type so when it's rendered as JSON it's output in the format 
+`{"name": ["1", "2",...]}`. An empty sequence should simply be `{}`
 
 ## Hints
 
-  * You can use `type name struct{}` to create a type that does not need to 
-    store data
-  * `func (_ name) Name() {}` can be used if the type function does not need
-    access to the type
+  * You'll need to implement `func (s Sequence) MarshalJSON() ([]byte, error)`
+  * The output is basically a map
