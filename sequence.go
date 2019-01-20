@@ -1,4 +1,4 @@
-package exercise8
+package exercise9
 
 import (
 	"errors"
@@ -10,36 +10,36 @@ import (
 type Sequence []string
 
 // Generator defines a function that can generate a Sequence.
-type Generator func(int) (Sequence, error)
+type Generator func(int) (*Sequence, error)
 
 // ErrNegativeRange is returned if a sequence is given a range of less than 0.
 var ErrNegativeRange = errors.New("cannot produce negative sequence")
 
 // Simple generator that returns the sequence 1 to n. If n < 0 then this will
 // return an error.
-func Simple(n int) (Sequence, error) {
+func Simple(n int) (*Sequence, error) {
 	if n < 0 {
-		return Sequence{}, ErrNegativeRange
+		return &Sequence{}, ErrNegativeRange
 	}
 
-	r := make(Sequence, n+1)
-	r[0] = "Simple"
+	s := make(Sequence, n+1)
+	s[0] = "Simple"
 
 	for i := 1; i <= n; i++ {
-		r[i] = strconv.Itoa(i)
+		s[i] = strconv.Itoa(i)
 	}
 
-	return r, nil
+	return &s, nil
 }
 
 // FizzBuzz returns the first n values of the FizzBuzz sequence. If n < 0 then
 // this will return an error.
-func FizzBuzz(n int) (Sequence, error) {
+func FizzBuzz(n int) (*Sequence, error) {
 	if n < 0 {
-		return []string{}, ErrNegativeRange
+		return &Sequence{}, ErrNegativeRange
 	}
 
-	s := make([]string, n+1)
+	s := make(Sequence, n+1)
 	s[0] = "FizzBuzz"
 
 	for i := 1; i <= n; i++ {
@@ -54,10 +54,25 @@ func FizzBuzz(n int) (Sequence, error) {
 			s[i] = strconv.Itoa(i)
 		}
 	}
+	return &s, nil
+}
+
+func DeferredReverse(n int) (*Sequence, error) {
+	if n < 0 {
+		return &Sequence{}, ErrNegativeRange
+	}
+
+	s := &Sequence{"DeferredReverse"}
+
+	for i := 1; i <= n; i++ {
+		defer func(i int) { *s = append(*s, strconv.Itoa(i)) }(i)
+	}
+
 	return s, nil
 }
 
 // Run the sequence g from 1 to n.
 func Run(g Generator, n int) (Sequence, error) {
-	return g(n)
+	p, err := g(n)
+	return *p, err
 }
