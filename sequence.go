@@ -9,15 +9,21 @@ import (
 // name of the sequence. Entry `n` holds the output for `n` on that sequence.
 type Sequence []string
 
-// Generator defines a function that can generate a Sequence.
-type Generator func(int) (*Sequence, error)
+// Generator can generate a Sequence.
+type Generator interface {
+	Run(n int) (*Sequence, error)
+}
+
+type Simple struct{}
+type FizzBuzz struct{}
+type DeferredReverse struct{}
 
 // ErrNegativeRange is returned if a sequence is given a range of less than 0.
 var ErrNegativeRange = errors.New("cannot produce negative sequence")
 
 // Simple generator that returns the sequence 1 to n. If n < 0 then this will
 // return an error.
-func Simple(n int) (*Sequence, error) {
+func (_ Simple) Run(n int) (*Sequence, error) {
 	if n < 0 {
 		return &Sequence{}, ErrNegativeRange
 	}
@@ -25,7 +31,7 @@ func Simple(n int) (*Sequence, error) {
 	s := make(Sequence, n+1)
 	s[0] = "Simple"
 
-	for i := 1; i <= n; i++ {
+	for i := 1; i <= int(n); i++ {
 		s[i] = strconv.Itoa(i)
 	}
 
@@ -34,7 +40,7 @@ func Simple(n int) (*Sequence, error) {
 
 // FizzBuzz returns the first n values of the FizzBuzz sequence. If n < 0 then
 // this will return an error.
-func FizzBuzz(n int) (*Sequence, error) {
+func (_ FizzBuzz) Run(n int) (*Sequence, error) {
 	if n < 0 {
 		return &Sequence{}, ErrNegativeRange
 	}
@@ -42,7 +48,7 @@ func FizzBuzz(n int) (*Sequence, error) {
 	s := make(Sequence, n+1)
 	s[0] = "FizzBuzz"
 
-	for i := 1; i <= n; i++ {
+	for i := 1; i <= int(n); i++ {
 		switch {
 		case i%3 == 0 && i%5 == 0:
 			s[i] = "FizzBuzz"
@@ -57,14 +63,14 @@ func FizzBuzz(n int) (*Sequence, error) {
 	return &s, nil
 }
 
-func DeferredReverse(n int) (*Sequence, error) {
+func (_ DeferredReverse) Run(n int) (*Sequence, error) {
 	if n < 0 {
 		return &Sequence{}, ErrNegativeRange
 	}
 
 	s := &Sequence{"DeferredReverse"}
 
-	for i := 1; i <= n; i++ {
+	for i := 1; i <= int(n); i++ {
 		defer func(i int) { *s = append(*s, strconv.Itoa(i)) }(i)
 	}
 
@@ -72,7 +78,7 @@ func DeferredReverse(n int) (*Sequence, error) {
 }
 
 // Run the sequence g from 1 to n.
-func (g Generator) Run(n int) (Sequence, error) {
-	p, err := g(n)
+func Run(g Generator, n int) (Sequence, error) {
+	p, err := g.Run(n)
 	return *p, err
 }
