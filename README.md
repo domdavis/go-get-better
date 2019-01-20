@@ -17,8 +17,6 @@ Turn your 'FizzBuzz' solution into a function in a package. Test the function.
   
 ## Hints
 
-  * You'll want to run `go mod init` (for example: 
-    `go mod init training`)
   * `go test` will test the code
   * Your test file needs the suffix `_test.go`
   * `go test --covermode=count` shows test coverage
