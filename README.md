@@ -7,7 +7,7 @@ within GitHub).
 
 ## Exercise 7
 
-Write a `Sequence` function that will take your `FizzBuzz` function and run it,
+Write a `Run` function that will take your `FizzBuzz` function and run it,
 returning the results.
     
 > Feel free to reuse your code from exercise 5.
@@ -15,4 +15,4 @@ returning the results.
 ## Hints
 
   * Your Function signature will be 
-    `Sequence(n int, f func(int) ([]string, error)) ([]string, error)`
+    `Run(n int, f func(int) ([]string, error)) ([]string, error)`

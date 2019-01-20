@@ -6,7 +6,7 @@ import (
 )
 
 func ExampleSequence() {
-	r, err := exercise7.Sequence(15, exercise7.FizzBuzz)
+	r, err := exercise7.Run(15, exercise7.FizzBuzz)
 
 	if err != nil {
 		fmt.Println(err)

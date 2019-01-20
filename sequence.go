@@ -33,6 +33,6 @@ func FizzBuzz(n int) ([]string, error) {
 }
 
 
-func Sequence(n int, f func(int) ([]string, error)) ([]string, error) {
+func Run(n int, f func(int) ([]string, error)) ([]string, error) {
 	return f(n)
 }
