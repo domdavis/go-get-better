@@ -33,7 +33,7 @@ var Simple = Generator{
 // FizzBuzz returns the first n values of the FizzBuzz sequence.
 var FizzBuzz = Generator{
 	Name:  "FizzBuzz",
-	Steps: []Step{fizz, buzz, number},
+	Steps: []Step{},
 }
 
 // Run the sequence g from 1 to n.
@@ -64,29 +64,4 @@ func (g Generator) Run(n int) (Sequence, error) {
 
 func passthrough(in <-chan int, out chan<- string) {
 	out <- strconv.Itoa(<-in)
-}
-
-func fizz(in <-chan int, out chan<- string) {
-	if <-in%3 == 0 {
-		out <- "Fizz"
-	} else {
-		out <- ""
-	}
-}
-
-func buzz(in <-chan int, out chan<- string) {
-	if <-in%5 == 0 {
-		out <- "Buzz"
-	} else {
-		out <- ""
-	}
-}
-
-func number(in <-chan int, out chan<- string) {
-	i := <-in
-	if i%3 != 0 && i%5 != 0 {
-		out <- strconv.Itoa(i)
-	} else {
-		out <- ""
-	}
 }
