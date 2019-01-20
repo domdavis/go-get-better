@@ -18,6 +18,4 @@ negative number.
   
 ## Hints
 
-  * You'll want to run `go mod init` (for example: 
-    `go mod init training/exercise4`)
   * The function signature will be `FizzBuzz(n int) (string, error)`
