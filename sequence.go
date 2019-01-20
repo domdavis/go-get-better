@@ -36,10 +36,10 @@ func Simple(n int) (Sequence, error) {
 // this will return an error.
 func FizzBuzz(n int) (Sequence, error) {
 	if n < 0 {
-		return []string{}, ErrNegativeRange
+		return Sequence{}, ErrNegativeRange
 	}
 
-	s := make([]string, n+1)
+	s := make(Sequence, n+1)
 	s[0] = "FizzBuzz"
 
 	for i := 1; i <= n; i++ {
