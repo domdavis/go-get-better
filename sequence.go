@@ -1,4 +1,4 @@
-package exercise9
+package exercise10
 
 import (
 	"errors"
@@ -72,7 +72,7 @@ func DeferredReverse(n int) (*Sequence, error) {
 }
 
 // Run the sequence g from 1 to n.
-func Run(g Generator, n int) (Sequence, error) {
+func (g Generator) Run(n int) (Sequence, error) {
 	p, err := g(n)
 	return *p, err
 }

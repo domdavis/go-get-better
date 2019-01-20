@@ -5,16 +5,10 @@ This repository contains the solutions for the exercises contained in the
 branch (for example `git checkout exercise-1`, or just select the branch from
 within GitHub).
 
-## Exercise 9
+## Exercise 10
 
-Use the code from exercise 9 implement a 'deferred reverse` sequence
+Turn the Run function from exercise 9 into a type function on Generator
       
 ## Hints
 
-  * `&` means pointer to, and `*` means get me the value pointed to
-  * You'll want to change `Generator` to `func(n int) (*Sequence, error)`, and
-    update `Simple` and `FizzBuzz`    
-  * your defer func will want to be `defer func(i int) { ... }(i)`
-
-  * You'll want to update `Run` to dereference the pointer to the sequence
-
+  * The signature becomes: `func (g Generator) Run(n int) (Sequence, error)`

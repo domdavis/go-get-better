@@ -1,13 +1,14 @@
-package exercise9_test
+package exercise10_test
 
 import (
 	"fmt"
 	"testing"
-	"training/exercise9"
+	"training/exercise10"
 )
 
 func ExampleSequence() {
-	if r, err := exercise9.Run(exercise9.Simple, 5); err != nil {
+	simple := exercise10.Generator(exercise10.Simple)
+	if r, err := simple.Run(5); err != nil {
 		fmt.Println(err)
 	} else {
 		for _, v := range r {
@@ -22,28 +23,29 @@ func ExampleSequence() {
 func TestSequences(t *testing.T) {
 	for _, test := range []struct {
 		name      string
-		generator exercise9.Generator
+		generator exercise10.Generator
 
-		sequence exercise9.Sequence
+		sequence exercise10.Sequence
 	}{
 		{
 			name:      "simple",
-			generator: exercise9.Simple,
-			sequence:  exercise9.Sequence{"Simple", "1", "2", "3", "4", "5"},
+			generator: exercise10.Simple,
+			sequence:  exercise10.Sequence{"Simple", "1", "2", "3", "4", "5"},
 		},
 		{
 			name:      "FizzBuzz",
-			generator: exercise9.FizzBuzz,
-			sequence:  exercise9.Sequence{"FizzBuzz", "1", "2", "Fizz", "4", "Buzz"},
+			generator: exercise10.FizzBuzz,
+			sequence:  exercise10.Sequence{"FizzBuzz", "1", "2", "Fizz", "4", "Buzz"},
 		},
 		{
 			name:      "DeferredReverse",
-			generator: exercise9.DeferredReverse,
-			sequence:  exercise9.Sequence{"DeferredReverse", "5", "4", "3", "2", "1"},
+			generator: exercise10.DeferredReverse,
+			sequence:  exercise10.Sequence{"DeferredReverse", "5", "4", "3", "2", "1"},
 		},
 	} {
 		t.Run(fmt.Sprintf("%s 1-5", test.name), func(t *testing.T) {
-			r, err := exercise9.Run(test.generator, 5)
+			g := exercise10.Generator(test.generator)
+			r, err := g.Run(5)
 
 			if err != nil {
 				t.Errorf("unexpected error for sequence %s: %s", test.name, err)
@@ -62,7 +64,8 @@ func TestSequences(t *testing.T) {
 		})
 
 		t.Run(fmt.Sprintf("%s 0", test.name), func(t *testing.T) {
-			r, err := exercise9.Run(test.generator, 0)
+			g := exercise10.Generator(test.generator)
+			r, err := g.Run(0)
 
 			if err != nil {
 				t.Errorf("unexpected error for sequence %s: %s", test.name, err)
@@ -76,9 +79,10 @@ func TestSequences(t *testing.T) {
 		})
 
 		t.Run(fmt.Sprintf("%s -1", test.name), func(t *testing.T) {
-			_, err := exercise9.Run(test.generator, -1)
+			g := exercise10.Generator(test.generator)
+			_, err := g.Run(-1)
 
-			if err != exercise9.ErrNegativeRange {
+			if err != exercise10.ErrNegativeRange {
 				t.Errorf("unexptected error for %s(-1): %s", test.name, err)
 			}
 		})
