@@ -1,4 +1,4 @@
-package exercise6
+package exercise7
 
 import (
 	"errors"
@@ -9,25 +9,30 @@ var ErrNegativeRange = errors.New("cannot produce negative amounts of FizzBuzz")
 
 // Generate the first n values of the FizzBuzz sequence. If n < 0 then this will
 // return an error.
-func FizzBuzz(n int) (map[int]string, error) {
+func FizzBuzz(n int) ([]string, error) {
 	if n < 0 {
-		return nil, ErrNegativeRange
+		return []string{}, ErrNegativeRange
 	}
 
-	m := make(map[int]string, n)
+	s := make([]string, n)
 
 	for i := 1; i <= n; i++ {
 		switch {
 		case i%3 == 0 && i%5 == 0:
-			m[i] = "FizzBuzz"
+			s[i-1] = "FizzBuzz"
 		case i%3 == 0:
-			m[i] = "Fizz"
+			s[i-1] = "Fizz"
 		case i%5 == 0:
-			m[i] = "Buzz"
+			s[i-1] = "Buzz"
 		default:
-			m[i] = strconv.Itoa(i)
+			s[i-1] = strconv.Itoa(i)
 		}
 	}
 
-	return m, nil
+	return s, nil
+}
+
+
+func Sequence(n int, f func(int) ([]string, error)) ([]string, error) {
+	return f(n)
 }
