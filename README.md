@@ -20,6 +20,7 @@ environment.
   
 ## Hints
 
+  * `go mod init training` to create the go module
   * `go build` compile the code
   * `go build -o fizzbuzz` will compile to a binary called `fizzbuzz`
   * you can quickly run the code to test it using `go run solution.go` (replace
