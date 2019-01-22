@@ -29,7 +29,7 @@ func ExampleSequence_MarshalJSON() {
 		fmt.Println(string(b))
 	}
 
-	r, _ = training.Run(training.Simple{}, 0)
+	r, _ = training.Run(training.Simple{}, 1)
 
 	if b, err := json.Marshal(r); err != nil {
 		fmt.Println(err)
@@ -37,7 +37,7 @@ func ExampleSequence_MarshalJSON() {
 		fmt.Println(string(b))
 	}
 
-	r, _ = training.Run(training.Simple{}, 1)
+	r, _ = training.Run(training.Simple{}, 0)
 
 	if b, err := json.Marshal(r); err != nil {
 		fmt.Println(err)
@@ -47,8 +47,8 @@ func ExampleSequence_MarshalJSON() {
 
 	// Output:
 	// {"Simple":["1","2","3","4","5"]}
-	// {}
 	// {"Simple":["1"]}
+	// {}
 }
 
 func TestSequences(t *testing.T) {
