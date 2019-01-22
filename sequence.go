@@ -25,15 +25,10 @@ var ErrNegativeRange = errors.New("cannot produce negative sequence")
 // MarshalJSON renders a sequence as a JSON object with the sequence name as
 // the key
 func (s Sequence) MarshalJSON() ([]byte, error) {
-	var sequence []string
 	o := map[string][]string{}
 
-	if len(s) > 2 {
-		sequence = s[1:]
-	}
-
 	if len(s) > 1 {
-		o[s[0]] = sequence
+		o[s[0]] = s[1:]
 	}
 
 	return json.Marshal(o)
