@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-var re = regexp.MustCompile(`/fizzbuzz/([0-9]+)`)
+var re = regexp.MustCompile(`/fizzbuzz/([0-9]+)$`)
 
 func FizzBuzz(w http.ResponseWriter, r *http.Request) {
 	match := re.FindStringSubmatch(r.URL.EscapedPath())
