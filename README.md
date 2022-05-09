@@ -17,4 +17,3 @@ Use the code from exercise 9 implement a 'deferred reverse` sequence
   * your defer func will want to be `defer func(i int) { ... }(i)`
 
   * You'll want to update `Run` to dereference the pointer to the sequence
-
