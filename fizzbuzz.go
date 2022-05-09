@@ -5,8 +5,8 @@ import (
 	"strings"
 )
 
-// Generate the first n values of the FizzBuzz sequence. If n < 1 then this will
-// return the empty string.
+// FizzBuzz generates the first n values of the FizzBuzz sequence. If n < 1
+// then this will return the empty string.
 func FizzBuzz(n int) string {
 	var b strings.Builder
 	for i := 1; i <= n; i++ {
