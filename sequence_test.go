@@ -1,11 +1,12 @@
 package training_test
+
 import (
 	"fmt"
 	"testing"
 	"training"
 )
 
-func ExampleSequence() {
+func ExampleRun() {
 	r, err := training.Run(15, training.FizzBuzz)
 
 	if err != nil {

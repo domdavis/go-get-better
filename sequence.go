@@ -7,8 +7,8 @@ import (
 
 var ErrNegativeRange = errors.New("cannot produce negative amounts of FizzBuzz")
 
-// Generate the first n values of the FizzBuzz sequence. If n < 0 then this will
-// return an error.
+// FizzBuzz Generates the first n values of the FizzBuzz sequence. If n < 0 then
+// this will return an error.
 func FizzBuzz(n int) ([]string, error) {
 	if n < 0 {
 		return []string{}, ErrNegativeRange
@@ -32,7 +32,7 @@ func FizzBuzz(n int) ([]string, error) {
 	return s, nil
 }
 
-
+// Run the given function passing in n.
 func Run(n int, f func(int) ([]string, error)) ([]string, error) {
 	return f(n)
 }
