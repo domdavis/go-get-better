@@ -9,7 +9,7 @@ import (
 // it's not an if/else tree and some cases will hit two branches.
 //
 // We print on one line and only go up to 15 to reduce the length of the output.
-func ExampleFizzBuzz() {
+func Example() {
 	for i := 1; i <= 19; i++ {
 		var out string
 

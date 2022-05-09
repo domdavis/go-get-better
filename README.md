@@ -13,7 +13,7 @@ Create a binary that will perform 'FizzBuzz'. The rules for this are:
   * If a number is divisible by 3 output Fizz
   * If a number is divisible by 5 output Buzz
   * If a number is divisible by 3 and 5 output FizzBuzz
-  * Otherwise output the number
+  * Otherwise, output the number
   
 >Feel free to reuse your code from exercise 1. The goal is to get a working 
 environment.
