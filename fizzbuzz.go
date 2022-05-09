@@ -7,8 +7,8 @@ import (
 
 var ErrNegativeRange = errors.New("cannot produce negative amounts of FizzBuzz")
 
-// Generate the first n values of the FizzBuzz sequence. If n < 0 then this will
-// return an error.
+// FizzBuzz generates the first n values of the FizzBuzz sequence. If n < 0 then
+// this will return an error.
 func FizzBuzz(n int) (map[int]string, error) {
 	if n < 0 {
 		return nil, ErrNegativeRange
