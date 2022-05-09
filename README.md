@@ -7,4 +7,4 @@ within GitHub).
 
 ## Generator Template
 
-Some template code to help with some of the boilerplate for later exercises.
+Template code to help with the boilerplate for later exercises.
