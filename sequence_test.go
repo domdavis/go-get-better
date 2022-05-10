@@ -43,7 +43,7 @@ func TestSequences(t *testing.T) {
 		},
 	} {
 		t.Run(fmt.Sprintf("%s 1-5", test.name), func(t *testing.T) {
-			g := training.Generator(test.generator)
+			g := test.generator
 			r, err := training.Run(g, 5)
 
 			if err != nil {
@@ -63,7 +63,7 @@ func TestSequences(t *testing.T) {
 		})
 
 		t.Run(fmt.Sprintf("%s 0", test.name), func(t *testing.T) {
-			g := training.Generator(test.generator)
+			g := test.generator
 			r, err := training.Run(g, 0)
 
 			if err != nil {
@@ -78,7 +78,7 @@ func TestSequences(t *testing.T) {
 		})
 
 		t.Run(fmt.Sprintf("%s -1", test.name), func(t *testing.T) {
-			g := training.Generator(test.generator)
+			g := test.generator
 			_, err := training.Run(g, -1)
 
 			if err != training.ErrNegativeRange {
