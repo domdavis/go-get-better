@@ -47,5 +47,4 @@ A [Makefile](Makefile) is included with some basic targets (mainly `run` and
 [golangci-lint][linter] for full code analysis. These are not required for the
 course and can be ignored.
 
-[playground]: https://play.golang.org/
 [linter]: https://golangci-lint.run
