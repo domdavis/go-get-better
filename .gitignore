@@ -1,2 +1,7 @@
-fizzbuzz
-go-get-better
+coverage.out
+cpu.prof
+mem.prof
+*.test
+*.iml
+.DS_Store
+/solution
