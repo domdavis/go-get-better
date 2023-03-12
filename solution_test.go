@@ -1,13 +1,14 @@
-package training_test
+package solution_test
 
 import (
 	"fmt"
 	"testing"
-	"training"
+
+	"github.com/domdavis/solution"
 )
 
 func ExampleSequence() {
-	simple := training.Generator(training.Simple)
+	simple := solution.Generator(solution.Simple)
 	if r, err := simple.Run(5); err != nil {
 		fmt.Println(err)
 	} else {
@@ -23,24 +24,24 @@ func ExampleSequence() {
 func TestSequences(t *testing.T) {
 	for _, test := range []struct {
 		name      string
-		generator training.Generator
+		generator solution.Generator
 
-		sequence training.Sequence
+		sequence solution.Sequence
 	}{
 		{
 			name:      "simple",
-			generator: training.Simple,
-			sequence:  training.Sequence{"Simple", "1", "2", "3", "4", "5"},
+			generator: solution.Simple,
+			sequence:  solution.Sequence{"Simple", "1", "2", "3", "4", "5"},
 		},
 		{
 			name:      "FizzBuzz",
-			generator: training.FizzBuzz,
-			sequence:  training.Sequence{"FizzBuzz", "1", "2", "Fizz", "4", "Buzz"},
+			generator: solution.FizzBuzz,
+			sequence:  solution.Sequence{"FizzBuzz", "1", "2", "Fizz", "4", "Buzz"},
 		},
 		{
 			name:      "DeferredReverse",
-			generator: training.DeferredReverse,
-			sequence:  training.Sequence{"DeferredReverse", "5", "4", "3", "2", "1"},
+			generator: solution.DeferredReverse,
+			sequence:  solution.Sequence{"DeferredReverse", "5", "4", "3", "2", "1"},
 		},
 	} {
 		t.Run(fmt.Sprintf("%s 1-5", test.name), func(t *testing.T) {
@@ -82,7 +83,7 @@ func TestSequences(t *testing.T) {
 			g := test.generator
 			_, err := g.Run(-1)
 
-			if err != training.ErrNegativeRange {
+			if err != solution.ErrNegativeRange {
 				t.Errorf("unexptected error for %s(-1): %s", test.name, err)
 			}
 		})
