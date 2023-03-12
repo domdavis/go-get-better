@@ -14,7 +14,15 @@ Create a program that will perform 'FizzBuzz'. The rules for this are:
   * If a number is divisible by 5 output Buzz
   * If a number is divisible by 3 and 5 output FizzBuzz
   * Otherwise, output the number
-  
+
+## Hints
+
+  * `go mod init exercise-1` to create the go module 
+  * `go build` compile the code
+  * `go build -o fizzbuzz` will compile to a binary called `fizzbuzz`
+  * you can quickly run the code to test it using `go run solution.go` (replace
+    `solution.go` with whatever you called your source file)
+
 ## Alternative solutions
 
 A couple of _joke_ alternative solutions are also provided. These are runnable
