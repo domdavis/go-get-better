@@ -16,3 +16,23 @@ returning the results.
 
   * Your Function signature will be 
     `Run(n int, f func(int) ([]string, error)) ([]string, error)`
+
+## Running The Tests
+
+To run the tests from the command line:
+
+```bash
+go test ./...
+```
+
+Or, for more verbose output and coverage information:
+
+```bash
+go test -v -covermode=count ./...
+```
+
+A [Makefile](Makefile) is included with some basic targets for testing, as well
+as perform a check of the code using tools like [golangci-lint][linter] for full
+code analysis. These are not required for the course and can be ignored.
+
+[linter]: https://golangci-lint.run

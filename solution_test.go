@@ -1,13 +1,14 @@
-package training_test
+package solution_test
 
 import (
 	"fmt"
 	"testing"
-	"training"
+
+	"github.com/domdavis/solution"
 )
 
 func ExampleRun() {
-	r, err := training.Run(15, training.FizzBuzz)
+	r, err := solution.Run(15, solution.FizzBuzz)
 
 	if err != nil {
 		fmt.Println(err)
@@ -22,8 +23,8 @@ func ExampleRun() {
 }
 
 func TestFizzBuzz(t *testing.T) {
-	_, err := training.FizzBuzz(-1)
-	if err != training.ErrNegativeRange {
+	_, err := solution.FizzBuzz(-1)
+	if err != solution.ErrNegativeRange {
 		t.Errorf("unexpected error: %s", err)
 	}
 }
