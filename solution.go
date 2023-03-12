@@ -1,4 +1,4 @@
-package training
+package solution
 
 import (
 	"errors"
@@ -57,6 +57,8 @@ func FizzBuzz(n int) (*Sequence, error) {
 	return &s, nil
 }
 
+// DeferredReverse will produce a descending set of numbers from n to 1 using
+// defer and pointers.
 func DeferredReverse(n int) (*Sequence, error) {
 	if n < 0 {
 		return &Sequence{}, ErrNegativeRange
