@@ -1,4 +1,4 @@
-package training
+package template
 
 import (
 	"errors"
