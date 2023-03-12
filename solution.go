@@ -1,4 +1,4 @@
-package training
+package solution
 
 import (
 	"strconv"
