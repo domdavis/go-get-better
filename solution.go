@@ -1,4 +1,4 @@
-package training
+package solution
 
 import (
 	"errors"
@@ -28,7 +28,8 @@ type DeferredReverse struct{}
 // ErrNegativeRange is returned if a sequence is given a range of less than 0.
 var ErrNegativeRange = errors.New("cannot produce negative sequence")
 
-func (_ Simple) Run(n int) (*Sequence, error) {
+// Run the Simple sequence.
+func (Simple) Run(n int) (*Sequence, error) {
 	if n < 0 {
 		return &Sequence{}, ErrNegativeRange
 	}
@@ -43,7 +44,8 @@ func (_ Simple) Run(n int) (*Sequence, error) {
 	return &s, nil
 }
 
-func (_ FizzBuzz) Run(n int) (*Sequence, error) {
+// Run the FizzBuzz sequence.
+func (FizzBuzz) Run(n int) (*Sequence, error) {
 	if n < 0 {
 		return &Sequence{}, ErrNegativeRange
 	}
@@ -66,7 +68,8 @@ func (_ FizzBuzz) Run(n int) (*Sequence, error) {
 	return &s, nil
 }
 
-func (_ DeferredReverse) Run(n int) (*Sequence, error) {
+// Run the DeferredReverse sequence.
+func (DeferredReverse) Run(n int) (*Sequence, error) {
 	if n < 0 {
 		return &Sequence{}, ErrNegativeRange
 	}

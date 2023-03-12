@@ -7,16 +7,19 @@ within GitHub).
 
 ## Exercise 11
 
-Change Run back to a normal function, and change it to take a `Generator` 
-interface.
+Using the code from Exercise 9 (not 10), change the `Run` function to be:
 
-The interface is: 
+```
+// Run the sequence g from 1 to n.
+func Run(g Generator, n int) (Sequence, error) {
+	p, err := g.Run(n)
+	return *p, err
+}
+```
 
-```go
-package training
+The `Generator` interface is defined as: 
 
-type Sequence []string
-
+```
 type Generator interface {
 	Run(n int) (*Sequence, error)
 }
@@ -26,5 +29,25 @@ type Generator interface {
 
   * You can use `type name struct{}` to create a type that does not need to 
     store data
-  * `func (_ name) Name() {}` can be used if the type function does not need
+  * `func (name) Run() {}` can be used if the type function does not need
     access to the type
+
+## Running The Tests
+
+To run the tests from the command line:
+
+```bash
+go test ./...
+```
+
+Or, for more verbose output and coverage information:
+
+```bash
+go test -v -covermode=count ./...
+```
+
+A [Makefile](Makefile) is included with some basic targets for testing, as well
+as perform a check of the code using tools like [golangci-lint][linter] for full
+code analysis. These are not required for the course and can be ignored.
+
+[linter]: https://golangci-lint.run
