@@ -1,4 +1,4 @@
-package training
+package solution
 
 import (
 	"errors"
@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// ErrNegativeRange is returned if a negative value is passed to FizzBuzz.
 var ErrNegativeRange = errors.New("cannot produce negative amounts of FizzBuzz")
 
 // FizzBuzz generates the first n values of the FizzBuzz sequence. If n < 0 then
