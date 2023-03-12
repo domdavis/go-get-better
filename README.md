@@ -39,6 +39,12 @@ go run solution.go
 Tests can be run using:
 
 ```bash
+go test ./...
+```
+
+Or, for more verbose output and coverage information:
+
+```bash
 go test -v -covermode=count ./...
 ```
 
