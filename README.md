@@ -13,14 +13,31 @@ Create a program that will perform 'FizzBuzz'. The rules for this are:
   * If a number is divisible by 3 output Fizz
   * If a number is divisible by 5 output Buzz
   * If a number is divisible by 3 and 5 output FizzBuzz
-  * Otherwise output the number
-  
-If you've not got your Go environment set up just yet you can do this exercise
-in the [Go Playground][playground]
+  * Otherwise, output the number
   
 ## Alternative solutions
 
 A couple of _joke_ alternative solutions are also provided. These are runnable
 tests and highlight how to write testable examples.
 
+## Running The Code
+
+To run the code from the command line:
+
+```bash
+go run solution.go
+```
+
+Tests can be run using:
+
+```bash
+go test -v -covermode=count ./...
+```
+
+A [Makefile](Makefile) is included with some basic targets (mainly `run` and 
+`test`) to do the above, as well as perform a check of the code using tools like
+[golangci-lint][linter] for full code analysis. These are not required for the
+course and can be ignored.
+
 [playground]: https://play.golang.org/
+[linter]: https://golangci-lint.run

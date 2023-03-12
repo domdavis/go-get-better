@@ -9,7 +9,7 @@ import (
 // switch statement instead.
 //
 // We print on one line and only go up to 19 to reduce the length of the output.
-func ExampleIdiomaticSolution() {
+func Example_idiomaticSolution() {
 	for i := 1; i <= 19; i++ {
 		switch {
 		case i%3 == 0 && i%5 == 0:
@@ -31,7 +31,7 @@ func ExampleIdiomaticSolution() {
 // This is likely to break if the random number generator changes.
 //
 // We print on one line and only go up to 19 to reduce the length of the output.
-func ExampleBrittleSolution() {
+func Example_brittleSolution() {
 	for i := 1; i <= 19; i++ {
 		if i%15 == 1 {
 			rand.Seed(int64(176064004))
@@ -50,7 +50,7 @@ func ExampleBrittleSolution() {
 // "magic" which may not be immediately obvious.
 //
 // We print on one line and only go up to 19 to reduce the length of the output.
-func ExampleCompactSolution() {
+func Example_compactSolution() {
 	pattern := []int{0, 0, 1, 0, 2, 1, 0, 0, 1, 2, 0, 1, 0, 0, 3}
 
 	for i := 1; i <= 19; i++ {

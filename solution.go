@@ -8,6 +8,7 @@ const (
 )
 
 func main() {
+	//nolint: gocritic // Not introduced switch statements yet.
 	for i := 1; i <= 100; i++ {
 		if i%3 == 0 && i%5 == 0 {
 			fmt.Printf("%-5d - %s%s", i, fizz, buzz)
@@ -18,6 +19,7 @@ func main() {
 		} else {
 			fmt.Print(i)
 		}
+
 		fmt.Println()
 	}
 }

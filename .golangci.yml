@@ -1,0 +1,157 @@
+linters:
+  disable-all: true
+  enable:
+    - asciicheck
+    - bidichk
+    - cyclop
+    - decorder
+    - depguard
+    - dogsled
+    - dupl
+    - durationcheck
+    - errcheck
+    - errchkjson
+    - errname
+    - errorlint
+    - exhaustive
+    - exportloopref
+    - forcetypeassert
+    - funlen
+    - gci
+    - gochecknoglobals
+    - gochecknoinits
+    - gocognit
+    - goconst
+    - gocritic
+    - godot
+    - godox
+    - goerr113
+    - gofmt
+    - goimports
+    - gomnd
+    - gomoddirectives
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - govet
+    - importas
+    - ineffassign
+    - ireturn
+    - lll
+    - maintidx
+    - misspell
+    - nakedret
+    - nestif
+    - nilerr
+    - nilnil
+    - nlreturn
+    - noctx
+    - nolintlint
+    - paralleltest
+    - predeclared
+    - stylecheck
+    - tagliatelle
+    - tenv
+    - testpackage
+    - thelper
+    - typecheck
+    - unconvert
+    - unused
+    - whitespace
+    - wrapcheck
+    - wsl
+
+linters-settings:
+  cyclop:
+    skip-tests: true
+  decorder:
+    dec-order:
+      - type
+      - var
+      - const
+      - func
+    disable-dec-order-check: false
+  dupl:
+    threshold: 100
+  errcheck:
+    check-type-assertions: true
+    check-blank: true
+    exclude-functions:
+      - encoding/json.Marshal
+      - encoding/json.MarshalIndent
+  errchkjson:
+    check-error-free-encoding: true
+    report-no-exported: true
+  exhaustive:
+    default-signifies-exhaustive: true
+  godot:
+    scope: all
+  gomnd:
+    ignored-functions:
+      - 'strconv.Parse*'
+  govet:
+    check-shadowing: true
+    enable-all: true
+    disable:
+      - fieldalignment
+  importas:
+    no-extra-aliases: true
+  ireturn:
+    allow:
+      - anon
+      - error
+      - empty
+      - stdlib
+      - ^([A-Z])$
+  lll:
+    line-length: 120
+    tab-width: 4
+  maligned:
+    suggest-new: true
+  misspell:
+    locale: UK
+    ignore-words:
+      - davisd
+      - color
+  nakedret:
+    max-func-lines: 0
+  nestif:
+    min-complexity: 4
+  nolintlint:
+    allow-leading-space: false
+    require-explanation: true
+    require-specific: true
+  stylecheck:
+    checks:
+      - all
+    http-status-code-whitelist: []
+  tenv:
+    all: true
+
+issues:
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - decorder
+        - dupl
+        - errcheck
+        - funlen
+        - gochecknoglobals
+        - gosec
+        - gocognit
+        - goconst
+        - godot
+        - goerr113
+        - ireturn
+        - maintidx
+        - nilnil
+        - noctx
+        - wsl
+    - path: config/
+      linters:
+        - gochecknoglobals
+        - gomnd
+        - tagliatelle
+  exclude-use-default: false
+  max-issues-per-linter: 0
+  max-same-issues: 0
