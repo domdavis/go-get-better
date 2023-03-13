@@ -1,14 +1,15 @@
-package training_test
+package solution_test
 
 import (
 	"encoding/json"
 	"fmt"
 	"testing"
-	"training"
+
+	"github.com/domdavis/solution"
 )
 
 func ExampleSequence() {
-	if r, err := training.Run(training.Simple{}, 5); err != nil {
+	if r, err := solution.Run(solution.Simple{}, 5); err != nil {
 		fmt.Println(err)
 	} else {
 		for _, v := range r {
@@ -21,7 +22,7 @@ func ExampleSequence() {
 }
 
 func ExampleSequence_MarshalJSON() {
-	r, _ := training.Run(training.Simple{}, 5)
+	r, _ := solution.Run(solution.Simple{}, 5)
 
 	if b, err := json.Marshal(r); err != nil {
 		fmt.Println(err)
@@ -29,7 +30,7 @@ func ExampleSequence_MarshalJSON() {
 		fmt.Println(string(b))
 	}
 
-	r, _ = training.Run(training.Simple{}, 1)
+	r, _ = solution.Run(solution.Simple{}, 1)
 
 	if b, err := json.Marshal(r); err != nil {
 		fmt.Println(err)
@@ -37,7 +38,7 @@ func ExampleSequence_MarshalJSON() {
 		fmt.Println(string(b))
 	}
 
-	r, _ = training.Run(training.Simple{}, 0)
+	r, _ = solution.Run(solution.Simple{}, 0)
 
 	if b, err := json.Marshal(r); err != nil {
 		fmt.Println(err)
@@ -54,29 +55,28 @@ func ExampleSequence_MarshalJSON() {
 func TestSequences(t *testing.T) {
 	for _, test := range []struct {
 		name      string
-		generator training.Generator
+		generator solution.Generator
 
-		sequence training.Sequence
+		sequence solution.Sequence
 	}{
 		{
 			name:      "simple",
-			generator: training.Simple{},
-			sequence:  training.Sequence{"Simple", "1", "2", "3", "4", "5"},
+			generator: solution.Simple{},
+			sequence:  solution.Sequence{"Simple", "1", "2", "3", "4", "5"},
 		},
 		{
 			name:      "FizzBuzz",
-			generator: training.FizzBuzz{},
-			sequence:  training.Sequence{"FizzBuzz", "1", "2", "Fizz", "4", "Buzz"},
+			generator: solution.FizzBuzz{},
+			sequence:  solution.Sequence{"FizzBuzz", "1", "2", "Fizz", "4", "Buzz"},
 		},
 		{
 			name:      "DeferredReverse",
-			generator: training.DeferredReverse{},
-			sequence:  training.Sequence{"DeferredReverse", "5", "4", "3", "2", "1"},
+			generator: solution.DeferredReverse{},
+			sequence:  solution.Sequence{"DeferredReverse", "5", "4", "3", "2", "1"},
 		},
 	} {
 		t.Run(fmt.Sprintf("%s 1-5", test.name), func(t *testing.T) {
-			g := training.Generator(test.generator)
-			r, err := training.Run(g, 5)
+			r, err := solution.Run(test.generator, 5)
 
 			if err != nil {
 				t.Errorf("unexpected error for sequence %s: %s", test.name, err)
@@ -95,8 +95,7 @@ func TestSequences(t *testing.T) {
 		})
 
 		t.Run(fmt.Sprintf("%s 0", test.name), func(t *testing.T) {
-			g := training.Generator(test.generator)
-			r, err := training.Run(g, 0)
+			r, err := solution.Run(test.generator, 0)
 
 			if err != nil {
 				t.Errorf("unexpected error for sequence %s: %s", test.name, err)
@@ -110,10 +109,9 @@ func TestSequences(t *testing.T) {
 		})
 
 		t.Run(fmt.Sprintf("%s -1", test.name), func(t *testing.T) {
-			g := training.Generator(test.generator)
-			_, err := training.Run(g, -1)
+			_, err := solution.Run(test.generator, -1)
 
-			if err != training.ErrNegativeRange {
+			if err != solution.ErrNegativeRange {
 				t.Errorf("unexptected error for %s(-1): %s", test.name, err)
 			}
 		})

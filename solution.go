@@ -1,4 +1,4 @@
-package training
+package solution
 
 import (
 	"encoding/json"
@@ -15,15 +15,22 @@ type Generator interface {
 	Run(n int) (*Sequence, error)
 }
 
+// Simple generator that returns the sequence 1 to n. If n < 0 then this will
+// return an error.
 type Simple struct{}
+
+// FizzBuzz generates the first n values of the FizzBuzz sequence. If n < 0 then
+// this will return an error.
 type FizzBuzz struct{}
+
+// DeferredReverse generates a sequence from n to 1.
 type DeferredReverse struct{}
 
 // ErrNegativeRange is returned if a sequence is given a range of less than 0.
 var ErrNegativeRange = errors.New("cannot produce negative sequence")
 
 // MarshalJSON renders a sequence as a JSON object with the sequence name as
-// the key
+// the key.
 func (s Sequence) MarshalJSON() ([]byte, error) {
 	o := map[string][]string{}
 
@@ -34,9 +41,8 @@ func (s Sequence) MarshalJSON() ([]byte, error) {
 	return json.Marshal(o)
 }
 
-// Simple generator that returns the sequence 1 to n. If n < 0 then this will
-// return an error.
-func (_ Simple) Run(n int) (*Sequence, error) {
+// Run the Simple sequence.
+func (Simple) Run(n int) (*Sequence, error) {
 	if n < 0 {
 		return &Sequence{}, ErrNegativeRange
 	}
@@ -44,16 +50,15 @@ func (_ Simple) Run(n int) (*Sequence, error) {
 	s := make(Sequence, n+1)
 	s[0] = "Simple"
 
-	for i := 1; i <= int(n); i++ {
+	for i := 1; i <= n; i++ {
 		s[i] = strconv.Itoa(i)
 	}
 
 	return &s, nil
 }
 
-// FizzBuzz returns the first n values of the FizzBuzz sequence. If n < 0 then
-// this will return an error.
-func (_ FizzBuzz) Run(n int) (*Sequence, error) {
+// Run the FizzBuzz sequence.
+func (FizzBuzz) Run(n int) (*Sequence, error) {
 	if n < 0 {
 		return &Sequence{}, ErrNegativeRange
 	}
@@ -61,7 +66,7 @@ func (_ FizzBuzz) Run(n int) (*Sequence, error) {
 	s := make(Sequence, n+1)
 	s[0] = "FizzBuzz"
 
-	for i := 1; i <= int(n); i++ {
+	for i := 1; i <= n; i++ {
 		switch {
 		case i%3 == 0 && i%5 == 0:
 			s[i] = "FizzBuzz"
@@ -76,14 +81,15 @@ func (_ FizzBuzz) Run(n int) (*Sequence, error) {
 	return &s, nil
 }
 
-func (_ DeferredReverse) Run(n int) (*Sequence, error) {
+// Run the DeferredReverse sequence.
+func (DeferredReverse) Run(n int) (*Sequence, error) {
 	if n < 0 {
 		return &Sequence{}, ErrNegativeRange
 	}
 
 	s := &Sequence{"DeferredReverse"}
 
-	for i := 1; i <= int(n); i++ {
+	for i := 1; i <= n; i++ {
 		defer func(i int) { *s = append(*s, strconv.Itoa(i)) }(i)
 	}
 
