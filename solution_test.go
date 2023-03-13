@@ -1,13 +1,14 @@
-package training_test
+package solution_test
 
 import (
 	"fmt"
 	"testing"
-	"training"
+
+	"github.com/domdavis/solution"
 )
 
 func ExampleSequence() {
-	g := training.Simple
+	g := solution.Simple
 	if r, err := g.Run(5); err != nil {
 		fmt.Println(err)
 	} else {
@@ -20,19 +21,19 @@ func ExampleSequence() {
 
 func TestSequences(t *testing.T) {
 	for _, test := range []struct {
-		generator training.Generator
-		sequence  training.Sequence
+		generator solution.Generator
+		sequence  solution.Sequence
 	}{
 		{
-			generator: training.Simple,
-			sequence: training.Sequence{
+			generator: solution.Simple,
+			sequence: solution.Sequence{
 				Name:     "Simple",
 				Elements: []string{"1", "2", "3", "4", "5"},
 			},
 		},
 		{
-			generator: training.FizzBuzz,
-			sequence: training.Sequence{
+			generator: solution.FizzBuzz,
+			sequence: solution.Sequence{
 				Name:     "FizzBuzz",
 				Elements: []string{"1", "2", "Fizz", "4", "Buzz"},
 			},
@@ -96,7 +97,7 @@ func TestSequences(t *testing.T) {
 					r.Name, test.sequence.Name)
 			}
 
-			if err != training.ErrNegativeRange {
+			if err != solution.ErrNegativeRange {
 				t.Errorf("unexptected error for %s(-1): %s",
 					test.sequence.Name, err)
 			}

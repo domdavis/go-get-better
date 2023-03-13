@@ -1,4 +1,4 @@
-package training
+package solution
 
 import (
 	"errors"
@@ -13,6 +13,7 @@ type Sequence struct {
 	Elements []string
 }
 
+// Step in a generation sequence. A generator can use zero or more steps.
 type Step func(in <-chan int, out chan<- string)
 
 // Generator can generate a Sequence.
@@ -27,7 +28,7 @@ var ErrNegativeRange = errors.New("cannot produce negative sequence")
 // Simple just returns what was passed into it
 var Simple = Generator{
 	Name:  "Simple",
-	Steps: []Step{passthrough},
+	Steps: []Step{pipe},
 }
 
 // FizzBuzz returns the first n values of the FizzBuzz sequence.
@@ -62,6 +63,6 @@ func (g Generator) Run(n int) (Sequence, error) {
 	return s, nil
 }
 
-func passthrough(in <-chan int, out chan<- string) {
+func pipe(in <-chan int, out chan<- string) {
 	out <- strconv.Itoa(<-in)
 }
