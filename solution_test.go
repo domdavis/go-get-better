@@ -45,8 +45,7 @@ func TestSequences(t *testing.T) {
 		},
 	} {
 		t.Run(fmt.Sprintf("%s 1-5", test.name), func(t *testing.T) {
-			g := test.generator
-			r, err := g.Run(5)
+			r, err := test.generator.Run(5)
 
 			if err != nil {
 				t.Errorf("unexpected error for sequence %s: %s", test.name, err)
@@ -65,8 +64,7 @@ func TestSequences(t *testing.T) {
 		})
 
 		t.Run(fmt.Sprintf("%s 0", test.name), func(t *testing.T) {
-			g := test.generator
-			r, err := g.Run(0)
+			r, err := test.generator.Run(0)
 
 			if err != nil {
 				t.Errorf("unexpected error for sequence %s: %s", test.name, err)
@@ -80,8 +78,7 @@ func TestSequences(t *testing.T) {
 		})
 
 		t.Run(fmt.Sprintf("%s -1", test.name), func(t *testing.T) {
-			g := test.generator
-			_, err := g.Run(-1)
+			_, err := test.generator.Run(-1)
 
 			if err != solution.ErrNegativeRange {
 				t.Errorf("unexptected error for %s(-1): %s", test.name, err)
